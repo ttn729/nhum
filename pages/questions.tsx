@@ -13,11 +13,16 @@ import React from "react";
 export default function Questions() {
   const [questionType, setQuestionType] = React.useState("");
   const [writeQuestion, setWriteQuestion] = React.useState("");
+  const [hint, setHint] = React.useState("");
 
   const [correctOption, setCorrectOption] = React.useState("");
   const [option1, setOption1] = React.useState("");
   const [option2, setOption2] = React.useState("");
   const [option3, setOption3] = React.useState("");
+
+  const handleHintChange = (event: any) => {
+    setHint(event.target.value);
+  };
 
   const handleCorrectOptionChange = (event: any) => {
     setCorrectOption(event.target.value);
@@ -44,7 +49,12 @@ export default function Questions() {
   };
 
   const submitQuestion = async () => {
-    if ((questionType === "Write" || questionType === "Random") && writeQuestion !== "") {
+    if (
+      (questionType === "Write" ||
+        questionType === "Random" ||
+        questionType === "Rewrite") &&
+      writeQuestion !== ""
+    ) {
       await fetch("/api/addWriteQuestion", {
         method: "POST",
         headers: {
@@ -57,6 +67,22 @@ export default function Questions() {
       });
 
       setWriteQuestion("");
+    }
+
+    if (questionType === "RewriteHint" && hint && writeQuestion) {
+      await fetch("/api/addWriteQuestion", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          questionType: questionType,
+          question: writeQuestion,
+          hint: hint,
+        }),
+      });
+      setWriteQuestion("");
+      setHint("");
     }
 
     if (
@@ -112,6 +138,10 @@ export default function Questions() {
             <MenuItem value={"Multiple Choice"}>Multiple Choice</MenuItem>
             <MenuItem value={"Write"}>Write Sentence</MenuItem>
             <MenuItem value={"Random"}>Random Order</MenuItem>
+            <MenuItem value={"Rewrite"}>Rewrite Question</MenuItem>
+            <MenuItem value={"RewriteHint"}>
+              Rewrite with Hint Question
+            </MenuItem>
           </Select>
         </FormControl>
 
@@ -159,7 +189,9 @@ export default function Questions() {
           </Box>
         )}
 
-        {questionType === "Write" && (
+        {(questionType === "Write" ||
+          questionType === "Random" ||
+          questionType === "Rewrite") && (
           <Box>
             <TextField
               id="write-question"
@@ -172,7 +204,7 @@ export default function Questions() {
           </Box>
         )}
 
-        {questionType === "Random" && (
+        {questionType === "RewriteHint" && (
           <Box>
             <TextField
               id="write-question"
@@ -180,6 +212,14 @@ export default function Questions() {
               variant="outlined"
               value={writeQuestion}
               onChange={handleWriteQuestionChange}
+              fullWidth
+            />
+            <TextField
+              id="write-hint"
+              label="Hint"
+              variant="outlined"
+              value={hint}
+              onChange={handleHintChange}
               fullWidth
             />
           </Box>

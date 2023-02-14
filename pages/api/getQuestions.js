@@ -7,11 +7,9 @@ export default async (req, res) => {
 
        let filter  = {};
 
-       if (req.query.questionType === "Multiple Choice") {
+       if (req.query.questionType )  {
             filter = {questionType: req.query.questionType};
        }
-
-    console.log(req.query);
 
        const questions = await db
            .collection("questions")
