@@ -1,0 +1,25 @@
+import clientPromise from "../../lib/mongodb";
+
+export default async (req, res) => {
+   try {
+       const client = await clientPromise;
+       const db = client.db("nhumnhumnhum");
+
+       let filter  = {};
+
+       if (req.query.questionType === "Multiple Choice") {
+            filter = {questionType: req.query.questionType};
+       }
+
+    console.log(req.query);
+
+       const questions = await db
+           .collection("questions")
+           .find(filter)
+           .toArray();
+
+       res.json(questions);
+   } catch (e) {
+       console.error(e);
+   }
+};

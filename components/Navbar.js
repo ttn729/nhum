@@ -1,63 +1,40 @@
-import Head from 'next/head'
-import clientPromise from '../lib/mongodb'
-import { InferGetServerSidePropsType,  } from 'next'
-import Link from 'next/link'
+import Link from "next/link";
 
-export async function getServerSideProps() {
-  try {
-    await clientPromise
-    // `await clientPromise` will use the default database passed in the MONGODB_URI
-    // However you can use another database (e.g. myDatabase) by replacing the `await clientPromise` with the following code:
-    //
-    // `const client = await clientPromise`
-    // `const db = client.db("myDatabase")`
-    //
-    // Then you can execute queries against your database like so:
-    // db.find({}) or any of the MongoDB Node Driver commands
-
-    return {
-      props: { isConnected: true },
-    }
-  } catch (e) {
-    console.error(e)
-    return {
-      props: { isConnected: false },
-    }
-  }
-}
-
-export default function Home({
-  isConnected,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function Navbar() {
   return (
-    <div className="container">
-      <Head>
-        <title>Ngân Hàng Đề Thi Của Nhúm</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <div>
+      <nav className="navbar">
+        <ul>
+          <li>
+            <Link href="/">
+              <button>Home</button>
+            </Link>
+          </li>
+          <li>
+            <Link href="/questions">
+              <button>Make Questions</button>
+            </Link>
+          </li>
 
-      <main>
-        <h1 className="title">
-          Welcome to <Link href="/questions">Ngân Hàng Đề Thi Của Nhúm</Link>
-        </h1>
+          <li>
+            <Link href="/answers">
+              <button>Customize Questions</button>
+            </Link>
+          </li>
 
-        {isConnected ? (
-          <h2 className="subtitle">You are connected to MongoDB</h2>
-        ) : (
-          <h2 className="subtitle">
-            You are NOT connected to MongoDB. Check the <code>README.md</code>{' '}
-            for instructions.
-          </h2>
-        )}
-      </main>
+          <li>
+            <Link href="/viewQuestions">
+              <button>All Questions Formatted</button>
+            </Link>
+          </li>
 
-      <footer>
-        <Link
-          href="/"
-        >
-          Powered by Spicy
-        </Link>
-      </footer>
+          <li>
+            <Link href="/api/getQuestions">
+              <button>All Questions JSON</button>
+            </Link>
+          </li>
+        </ul>
+      </nav>
 
       <style jsx>{`
         .container {
@@ -67,6 +44,16 @@ export default function Home({
           flex-direction: column;
           justify-content: center;
           align-items: center;
+        }
+
+        .navbar ul {
+          list-style-type: none;
+          margin: 0;
+          padding: 0;
+          display: flex;
+          align-items: center;
+          justify-content: left;
+          height: 100%;
         }
 
         main {
@@ -193,21 +180,6 @@ export default function Home({
           }
         }
       `}</style>
-
-      <style jsx global>{`
-        html,
-        body {
-          padding: 0;
-          margin: 0;
-          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-            Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
-            sans-serif;
-        }
-
-        * {
-          box-sizing: border-box;
-        }
-      `}</style>
     </div>
-  )
+  );
 }
