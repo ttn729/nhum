@@ -9,9 +9,7 @@ import WriteQuestionsView from "./WriteQuestionsView";
 import RewriteQuestionsView from "./RewriteQuestionsView copy";
 
 
-
 export default function ViewQuestions() {
-  const [questions, setQuestions] = React.useState([{}]);
   const [mcquestions, setMCQuestions] = React.useState([{}]);
   const [randomQuestions, setRandomQuestions] = React.useState([{}]);
   const [rewriteQuestions, setRewriteQuestions] = React.useState([{}]);
@@ -19,19 +17,6 @@ export default function ViewQuestions() {
   const [writeQuestions, setWriteQuestions] = React.useState([{}]);
 
   
-  const generateAllQuestions = async () => {
-    const response = await fetch("/api/getQuestions", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
-    response.json().then((json) => {
-      setQuestions(json);
-    });
-  };
-
   const generateAllMultipleChoice = async () => {
     const response = await fetch("/api/getQuestions?" + new URLSearchParams({ "questionType": "Multiple Choice" }), {
       method: "GET",
