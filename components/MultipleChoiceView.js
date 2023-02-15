@@ -7,12 +7,12 @@ export default function MultipleChoiceView({ multipleChoiceQuestions }) {
 
   return (
     <Box>
-      <h1>Phần trắc nghiệm</h1>
+      <h3>Phần trắc nghiệm</h3>
 
       {multipleChoiceQuestions?.map((question, index) => {
         return (
           <Box key={index}>
-            <h3>{index + 1}. {question.question}</h3>
+            <p>{index + 1}. {question.question}</p>
             <p>
               A. {question.correctOption} B. {question.option1} C. {question.option2} D. {question.option3}
             </p>

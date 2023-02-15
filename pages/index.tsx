@@ -66,6 +66,7 @@ export default function Home({
           flex-direction: column;
           justify-content: center;
           align-items: center;
+          background: #66FF99;
         }
 
         main {
@@ -84,6 +85,7 @@ export default function Home({
           display: flex;
           justify-content: center;
           align-items: center;
+          background: white;
         }
 
         footer img {

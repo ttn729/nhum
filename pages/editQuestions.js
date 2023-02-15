@@ -52,7 +52,7 @@ export default function EditQuestions() {
   };
 
   return (
-    <div className="container">
+    <div>
       <Head>
         <title>Ngân Hàng Đề Thi Của Nhúm</title>
         <link rel="icon" href="/favicon.ico" />

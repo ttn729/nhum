@@ -7,12 +7,12 @@ export default function RewriteQuestionsView({ rewriteQuestions: rewriteQuestion
 
   return (
     <Box>
-      <h1>Viết lại câu hoàn chỉnh dựa theo từ cho sẵn</h1>
+      <h3>Viết lại câu hoàn chỉnh dựa theo từ cho sẵn</h3>
 
       {rewriteQuestions?.map((question, index) => {
         return (
           <Box key={index}>
-            <h3>{index + 1}. {question.question}</h3>
+            <p>{index + 1}. {question.question}</p>
             <p>{"_".repeat(String(question.question).length)}</p>
           </Box>
         );

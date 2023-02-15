@@ -6,7 +6,7 @@ import MultipleChoiceView from './MultipleChoiceView'
 import RandomOrderView from "./RandomOrderView";
 import RewriteHintQuestionsView from "./RewriteHintQuestions";
 import WriteQuestionsView from "./WriteQuestionsView";
-import RewriteQuestionsView from "./RewriteQuestionsView copy";
+import RewriteQuestionsView from "./RewriteQuestionsView";
 
 
 export default function ViewQuestions() {
@@ -86,7 +86,6 @@ export default function ViewQuestions() {
 
 
   useEffect(() => {
-    generateAllQuestions();
     generateAllMultipleChoice();
     generateAllRandomQuestions();
     generateAllRewriteQuestions();
@@ -96,6 +95,9 @@ export default function ViewQuestions() {
 
   return (
     <Box>
+
+      <h3>Title {"_".repeat(26)} Date {"_".repeat(26)}</h3>
+      <h3>Name {"_".repeat(25)} Grade {"_".repeat(25)}</h3>
 
       <MultipleChoiceView multipleChoiceQuestions={mcquestions} />
       <RewriteQuestionsView rewriteQuestions={rewriteQuestions} />

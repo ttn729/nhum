@@ -123,7 +123,7 @@ export default function Questions() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
+      <main className="container">
         <h1 className="title">Make Questions</h1>
 
         <FormControl sx={{ m: 1, minWidth: 150 }}>

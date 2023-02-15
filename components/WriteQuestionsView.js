@@ -7,12 +7,12 @@ export default function WriteQuestionsView({ writeQuestions: writeQuestions }) {
 
   return (
     <Box>
-      <h1>Trả lời câu hỏi</h1>
+      <h3>Trả lời câu hỏi</h3>
 
       {writeQuestions?.map((question, index) => {
         return (
           <Box key={index}>
-            <h3>{index + 1}. {question.question}</h3>
+            <p>{index + 1}. {question.question}</p>
             <p>{"_".repeat(String(question.question).length)}</p>
           </Box>
         );
