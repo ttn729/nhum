@@ -55,7 +55,7 @@ export default function Questions() {
         questionType === "Rewrite") &&
       writeQuestion !== ""
     ) {
-      await fetch("/api/addWriteQuestion", {
+      await fetch("/api/addQuestion", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -70,7 +70,7 @@ export default function Questions() {
     }
 
     if (questionType === "RewriteHint" && hint && writeQuestion) {
-      await fetch("/api/addWriteQuestion", {
+      await fetch("/api/addQuestion", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -93,7 +93,7 @@ export default function Questions() {
       option2 &&
       option3
     ) {
-      await fetch("/api/addWriteQuestion", {
+      await fetch("/api/addQuestion", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

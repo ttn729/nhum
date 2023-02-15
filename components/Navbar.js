@@ -17,8 +17,8 @@ export default function Navbar() {
           </li>
 
           <li>
-            <Link href="/answers">
-              <button>Customize Questions</button>
+            <Link href="/editQuestions">
+              <button>Edit Questions</button>
             </Link>
           </li>
 
