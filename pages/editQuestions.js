@@ -8,6 +8,7 @@ import React from "react";
 
 export default function EditQuestions() {
   const [questions, setQuestions] = React.useState([{}]);
+  const [toDelete, setToDelete] = React.useState(false);
 
   const generateAllQuestions = async () => {
     const response = await fetch("/api/getQuestions", {
@@ -23,13 +24,32 @@ export default function EditQuestions() {
     });
   };
 
+  const deleteQuestion = async (id) => {
+    const response = await fetch(
+      "/api/deleteQuestion?" + new URLSearchParams({ id: id }),
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    response.json().then((json) => {
+      console.log(json);
+    });
+
+    setToDelete(!toDelete);
+  };
+
   useEffect(() => {
     generateAllQuestions();
-  }, []);
+  }, [toDelete]);
 
   const handleDelete = (_id) => {
+    deleteQuestion(_id);
     console.log(_id);
-  }
+  };
 
   return (
     <div className="container">
@@ -40,12 +60,13 @@ export default function EditQuestions() {
 
       <main>
         <h1 className="title">
-          Welcome to <Link href="/questions">Ngân Hàng Đề Thi Của Nhúm</Link>
+          Click on the <DeleteIcon /> button to delete unwanted questions.
         </h1>
 
         {questions?.map((question, index) => {
           return (
             <Box
+              key={index}
               sx={{
                 display: "flex",
                 flexdirection: "row",
@@ -59,9 +80,19 @@ export default function EditQuestions() {
                 </button>
               </Box>
 
-              <Box key={index} sx={{}}>
+              <Box>
                 <h3>Question Type: {question.questionType}</h3>
                 <h3>Question Prompt: {question.question}</h3>
+                {question.questionType === "Multiple Choice" && (
+                  <p>
+                    {" "}
+                    A. {question.correctOption} B. {question.option1} C.{" "}
+                    {question.option2} D. {question.option3}
+                  </p>
+                )}
+                {question.questionType === "RewriteHint" && (
+                  <h3>Question Hint: {question.hint} {".".repeat(String(question.question).length)}</h3>
+                )}
               </Box>
             </Box>
           );

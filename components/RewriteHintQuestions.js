@@ -14,7 +14,7 @@ export default function RewriteHintQuestionsView({ rewriteHintQuestions: rewrite
       {rewriteHintQuestions?.map((question, index) => {
         return (
           <Box key={index}>
-            <h3>{index + 1}.{question.question}</h3>
+            <h3>{index + 1}. {question.question}</h3>
             <p>{question.hint} {"_".repeat(String(question.question).length)}</p>
 
           </Box>
