@@ -10,7 +10,7 @@
     "@emotion/styled": "^11.10.5",
     "@mui/icons-material": "^5.11.9",
     "@mui/material": "^5.11.9",
-    "material-ui": "^0.20.2",
+    "material-ui": "^0.15.0",
     "mongodb": "^4.14.0",
     "next": "latest",
     "react": "^18.2.0",

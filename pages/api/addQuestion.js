@@ -6,10 +6,8 @@ export default async (req, res) => {
        const client = await clientPromise;
        const db = client.db("nhumnhumnhum");
 
-       console.log(req);
-
        const movies = await db
-           .collection("questions")
+           .collection(req.body.collectionName)
            .insertOne(req.body)
 
        res.json(movies);

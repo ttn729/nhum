@@ -20,6 +20,12 @@ export default function Questions() {
   const [option2, setOption2] = React.useState("");
   const [option3, setOption3] = React.useState("");
 
+  const [collectionName, setCollectionName] = React.useState("");
+
+  const handleCollectionNameChange = (event: any) => {
+    setCollectionName(event.target.value);
+  };
+
   const handleHintChange = (event: any) => {
     setHint(event.target.value);
   };
@@ -63,6 +69,7 @@ export default function Questions() {
         body: JSON.stringify({
           questionType: questionType,
           question: writeQuestion,
+          collectionName: collectionName,
         }),
       });
 
@@ -78,6 +85,7 @@ export default function Questions() {
         body: JSON.stringify({
           questionType: questionType,
           question: writeQuestion,
+          collectionName: collectionName,
           hint: hint,
         }),
       });
@@ -101,6 +109,7 @@ export default function Questions() {
         body: JSON.stringify({
           questionType: questionType,
           question: writeQuestion,
+          collectionName: collectionName,
           correctOption: correctOption,
           option1: option1,
           option2: option2,
@@ -125,6 +134,16 @@ export default function Questions() {
 
       <main className="container">
         <h1 className="title">Make Questions</h1>
+        <Box>
+          <TextField
+            id="write-collectionName"
+            label="Enter Collection Name"
+            variant="outlined"
+            value={collectionName}
+            onChange={handleCollectionNameChange}
+            fullWidth
+          ></TextField>
+        </Box>
 
         <FormControl sx={{ m: 1, minWidth: 150 }}>
           <InputLabel id="select-question-type">Question Type</InputLabel>

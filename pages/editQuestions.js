@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Link from "next/link";
 import { useEffect } from "react";
 import { Box } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -91,7 +90,10 @@ export default function EditQuestions() {
                   </p>
                 )}
                 {question.questionType === "RewriteHint" && (
-                  <h3>Question Hint: {question.hint} {".".repeat(String(question.question).length)}</h3>
+                  <h3>
+                    Question Hint: {question.hint}{" "}
+                    {".".repeat(String(question.question).length)}
+                  </h3>
                 )}
               </Box>
             </Box>
