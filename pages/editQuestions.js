@@ -35,7 +35,7 @@ export default function EditQuestions() {
 
   const deleteQuestion = async (id) => {
     const response = await fetch(
-      "/api/deleteQuestion?" + new URLSearchParams({ id: id }),
+      "/api/deleteQuestion?" + new URLSearchParams({ id: id, "collectionName": collectionName }),
       {
         method: "GET",
         headers: {
