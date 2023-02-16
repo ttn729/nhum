@@ -2,7 +2,7 @@ import { Box } from "@mui/material";
 
 export default function RewriteHintQuestionsView({ rewriteHintQuestions: rewriteHintQuestions }) {
 
-  if (!rewriteHintQuestions) {
+  if (!rewriteHintQuestions || rewriteHintQuestions.length === 0) {
     return null;
   }
 

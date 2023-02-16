@@ -234,7 +234,7 @@ export default function Questions() {
           </Box>
         )}
 
-        {questionType !== "" && (
+        {questionType !== "" && collectionName !== "" && (
           <Button onClick={submitQuestion}>Add Question</Button>
         )}
       </main>

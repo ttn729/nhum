@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 
 export default function RandomOrderView({ randomQuestions }) {
-  if (!randomQuestions) {
+  if (!randomQuestions || randomQuestions.length === 0) {
     return null;
   }
 

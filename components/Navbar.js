@@ -39,7 +39,7 @@ export default function Navbar() {
           </li>
 
         </ul>
-        <Box>
+        <Box marginTop={2}>
           <TextField
             id="write-collectionName"
             label="Enter Collection Name"

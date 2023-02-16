@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 
 export default function RewriteQuestionsView({ rewriteQuestions: rewriteQuestions }) {
-  if (!rewriteQuestions) {
+  if (!rewriteQuestions || rewriteQuestions.length === 0 ) {
     return null;
   }
 

@@ -1,9 +1,11 @@
 import { Box } from "@mui/material";
 
 export default function MultipleChoiceView({ multipleChoiceQuestions }) {
-  if (!multipleChoiceQuestions) {
+  if (!multipleChoiceQuestions || multipleChoiceQuestions.length === 0) {
     return null;
   }
+
+  console.log(multipleChoiceQuestions);
 
   return (
     <Box>

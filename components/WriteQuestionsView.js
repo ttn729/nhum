@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 
 export default function WriteQuestionsView({ writeQuestions: writeQuestions }) {
-  if (!writeQuestions) {
+  if (!writeQuestions || writeQuestions.length === 0) {
     return null;
   }
 
