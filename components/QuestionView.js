@@ -11,11 +11,11 @@ import { useCollectionNameStore } from "../store/collectionNameStore";
 
 
 export default function ViewQuestions() {
-  const [mcquestions, setMCQuestions] = React.useState([{}]);
-  const [randomQuestions, setRandomQuestions] = React.useState([{}]);
-  const [rewriteQuestions, setRewriteQuestions] = React.useState([{}]);
-  const [rewriteHintQuestions, setRewriteHintQuestions] = React.useState([{}]);
-  const [writeQuestions, setWriteQuestions] = React.useState([{}]);
+  const [mcquestions, setMCQuestions] = React.useState([]);
+  const [randomQuestions, setRandomQuestions] = React.useState([]);
+  const [rewriteQuestions, setRewriteQuestions] = React.useState([]);
+  const [rewriteHintQuestions, setRewriteHintQuestions] = React.useState([]);
+  const [writeQuestions, setWriteQuestions] = React.useState([]);
   const collectionName = useCollectionNameStore((state) => state.collectionName)
   
   const generateAllMultipleChoice = async () => {

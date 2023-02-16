@@ -8,7 +8,7 @@ import { useCollectionNameStore } from "../store/collectionNameStore";
 import React from "react";
 
 export default function EditQuestions() {
-  const [questions, setQuestions] = React.useState([{}]);
+  const [questions, setQuestions] = React.useState([]);
   const [toDelete, setToDelete] = React.useState(false);
   const collectionName = useCollectionNameStore((state) => state.collectionName)
 
