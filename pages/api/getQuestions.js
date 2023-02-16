@@ -12,7 +12,7 @@ export default async (req, res) => {
        }
 
        const questions = await db
-           .collection("questions")
+           .collection(req.query.collectionName)
            .find(filter)
            .toArray();
 

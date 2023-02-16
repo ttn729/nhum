@@ -10,6 +10,8 @@ import Button from "@mui/material/Button";
 import Head from "next/head";
 import React from "react";
 
+import { useCollectionNameStore } from "../store/collectionNameStore";
+
 export default function Questions() {
   const [questionType, setQuestionType] = React.useState("");
   const [writeQuestion, setWriteQuestion] = React.useState("");
@@ -20,11 +22,9 @@ export default function Questions() {
   const [option2, setOption2] = React.useState("");
   const [option3, setOption3] = React.useState("");
 
-  const [collectionName, setCollectionName] = React.useState("");
+  // const [collectionName, setCollectionName] = React.useState("");
+  const collectionName = useCollectionNameStore((state) => state.collectionName)
 
-  const handleCollectionNameChange = (event: any) => {
-    setCollectionName(event.target.value);
-  };
 
   const handleHintChange = (event: any) => {
     setHint(event.target.value);
@@ -134,16 +134,6 @@ export default function Questions() {
 
       <main className="container">
         <h1 className="title">Make Questions</h1>
-        <Box>
-          <TextField
-            id="write-collectionName"
-            label="Enter Collection Name"
-            variant="outlined"
-            value={collectionName}
-            onChange={handleCollectionNameChange}
-            fullWidth
-          ></TextField>
-        </Box>
 
         <FormControl sx={{ m: 1, minWidth: 150 }}>
           <InputLabel id="select-question-type">Question Type</InputLabel>

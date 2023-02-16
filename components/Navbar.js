@@ -1,6 +1,16 @@
 import Link from "next/link";
+import { useCollectionNameStore } from "../store/collectionNameStore";
+import { Box, TextField } from "@mui/material";
 
 export default function Navbar() {
+
+  const collectionName = useCollectionNameStore((state) => state.collectionName)
+  const setCollectionName = useCollectionNameStore((state) => state.setCollectionName)
+
+  const handleCollectionNameChange = (event) => {
+    setCollectionName(event.target.value);
+  };
+
   return (
     <div>
       <nav className="navbar">
@@ -28,12 +38,17 @@ export default function Navbar() {
             </Link>
           </li>
 
-          <li>
-            <Link href="/api/getQuestions">
-              <button>All Questions JSON</button>
-            </Link>
-          </li>
         </ul>
+        <Box>
+          <TextField
+            id="write-collectionName"
+            label="Enter Collection Name"
+            variant="outlined"
+            value={collectionName}
+            onChange={handleCollectionNameChange}
+            fullWidth
+          ></TextField>
+        </Box>
       </nav>
 
       <style jsx>{`

@@ -7,6 +7,7 @@ import RandomOrderView from "./RandomOrderView";
 import RewriteHintQuestionsView from "./RewriteHintQuestions";
 import WriteQuestionsView from "./WriteQuestionsView";
 import RewriteQuestionsView from "./RewriteQuestionsView";
+import { useCollectionNameStore } from "../store/collectionNameStore";
 
 
 export default function ViewQuestions() {
@@ -15,10 +16,10 @@ export default function ViewQuestions() {
   const [rewriteQuestions, setRewriteQuestions] = React.useState([{}]);
   const [rewriteHintQuestions, setRewriteHintQuestions] = React.useState([{}]);
   const [writeQuestions, setWriteQuestions] = React.useState([{}]);
-
+  const collectionName = useCollectionNameStore((state) => state.collectionName)
   
   const generateAllMultipleChoice = async () => {
-    const response = await fetch("/api/getQuestions?" + new URLSearchParams({ "questionType": "Multiple Choice" }), {
+    const response = await fetch("/api/getQuestions?" + new URLSearchParams({ "questionType": "Multiple Choice", "collectionName": collectionName }), {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -32,7 +33,7 @@ export default function ViewQuestions() {
 
 
   const generateAllRandomQuestions = async () => {
-    const response = await fetch("/api/getQuestions?" + new URLSearchParams({ "questionType": "Random" }), {
+    const response = await fetch("/api/getQuestions?" + new URLSearchParams({ "questionType": "Random", "collectionName": collectionName  }), {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -45,7 +46,7 @@ export default function ViewQuestions() {
   };
 
   const generateAllRewriteQuestions = async () => {
-    const response = await fetch("/api/getQuestions?" + new URLSearchParams({ "questionType": "Rewrite" }), {
+    const response = await fetch("/api/getQuestions?" + new URLSearchParams({ "questionType": "Rewrite", "collectionName": collectionName }), {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -58,7 +59,7 @@ export default function ViewQuestions() {
   };
 
   const generateAllRewriteHintQuestions = async () => {
-    const response = await fetch("/api/getQuestions?" + new URLSearchParams({ "questionType": "RewriteHint" }), {
+    const response = await fetch("/api/getQuestions?" + new URLSearchParams({ "questionType": "RewriteHint", "collectionName": collectionName  }), {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -72,7 +73,7 @@ export default function ViewQuestions() {
   };
 
   const generateAllWriteQuestions = async () => {
-    const response = await fetch("/api/getQuestions?" + new URLSearchParams({ "questionType": "Write" }), {
+    const response = await fetch("/api/getQuestions?" + new URLSearchParams({ "questionType": "Write", "collectionName": collectionName  }), {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

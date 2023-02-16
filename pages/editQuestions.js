@@ -2,25 +2,35 @@ import Head from "next/head";
 import { useEffect } from "react";
 import { Box } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { useCollectionNameStore } from "../store/collectionNameStore";
+
 
 import React from "react";
 
 export default function EditQuestions() {
   const [questions, setQuestions] = React.useState([{}]);
   const [toDelete, setToDelete] = React.useState(false);
+  const collectionName = useCollectionNameStore((state) => state.collectionName)
+
 
   const generateAllQuestions = async () => {
-    const response = await fetch("/api/getQuestions", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
 
-    response.json().then((json) => {
-      setQuestions(json);
-      console.log(json);
-    });
+    if (collectionName) {
+      const response = await fetch("/api/getQuestions?" + new URLSearchParams({ "collectionName": collectionName }), {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+  
+      response.json().then((json) => {
+        setQuestions(json);
+        console.log(json);
+      });
+    }
+    else {
+      setQuestions([{}]);
+    }
   };
 
   const deleteQuestion = async (id) => {
@@ -38,12 +48,12 @@ export default function EditQuestions() {
       console.log(json);
     });
 
-    setToDelete(!toDelete);
+    setToDelete(!toDelete, collectionName);
   };
 
   useEffect(() => {
     generateAllQuestions();
-  }, [toDelete]);
+  }, [toDelete, collectionName]);
 
   const handleDelete = (_id) => {
     deleteQuestion(_id);
