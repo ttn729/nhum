@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useCollectionNameStore } from "../store/collectionNameStore";
-import { Box, TextField } from "@mui/material";
+import { Box, TextField, Button } from "@mui/material";
 
 export default function Navbar() {
 
@@ -12,29 +12,29 @@ export default function Navbar() {
   };
 
   return (
-    <div>
+    <Box sx={{padding:3}}>
       <nav className="navbar">
         <ul>
           <li>
-            <Link href="/">
-              <button>Home</button>
+            <Link href="/" style={{ textDecoration: 'none' }}>
+              <Button variant="contained" sx={{border:2, borderColor:"white", backgroundColor:"green", ":hover":{backgroundColor: '#344648'}}}>Home</Button>
             </Link>
           </li>
           <li>
-            <Link href="/questions">
-              <button>Make Questions</button>
-            </Link>
-          </li>
-
-          <li>
-            <Link href="/editQuestions">
-              <button>Edit Questions</button>
+            <Link href="/questions" style={{ textDecoration: 'none'}}>
+              <Button variant="contained" sx={{border:2, borderColor:"white", backgroundColor:"green", ":hover":{backgroundColor: '#344648'}  }}>Make Questions</Button>
             </Link>
           </li>
 
           <li>
-            <Link href="/viewQuestions">
-              <button>All Questions Formatted</button>
+            <Link href="/editQuestions" style={{ textDecoration: 'none' }}>
+              <Button variant="contained" sx={{border:2, borderColor:"white", backgroundColor:"green", ":hover":{backgroundColor: '#344648'}  }}>Edit Questions</Button>
+            </Link>
+          </li>
+
+          <li>
+            <Link href="/viewQuestions" style={{ textDecoration: 'none' }}>
+              <Button variant="contained" sx={{border:2, borderColor:"white", backgroundColor:"green", ":hover":{backgroundColor: '#344648'}  }}>All Questions Formatted</Button>
             </Link>
           </li>
 
@@ -195,6 +195,6 @@ export default function Navbar() {
           }
         }
       `}</style>
-    </div>
+    </Box>
   );
 }

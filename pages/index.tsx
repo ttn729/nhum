@@ -38,7 +38,7 @@ export default function Home({
 
       <main>
         <h1 className="title">
-          Welcome to <Link href="/questions">Ngân Hàng Đề Thi Của Nhúm</Link>
+          Welcome to <Link href="/questions" style={{ textDecoration: 'none', color:'white',  }}>Ngân Hàng Đề Thi Của Nhúm</Link>
         </h1>
 
         {isConnected ? (
@@ -66,7 +66,7 @@ export default function Home({
           flex-direction: column;
           justify-content: center;
           align-items: center;
-          background: #66FF99;
+          background: green;
         }
 
         main {

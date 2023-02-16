@@ -16,6 +16,7 @@ export default function Questions() {
   const [questionType, setQuestionType] = React.useState("");
   const [writeQuestion, setWriteQuestion] = React.useState("");
   const [hint, setHint] = React.useState("");
+  const [bulkRandomQuestions, setbulkRandomQuestions] = React.useState("");
 
   const [correctOption, setCorrectOption] = React.useState("");
   const [option1, setOption1] = React.useState("");
@@ -23,11 +24,16 @@ export default function Questions() {
   const [option3, setOption3] = React.useState("");
 
   // const [collectionName, setCollectionName] = React.useState("");
-  const collectionName = useCollectionNameStore((state) => state.collectionName)
-
+  const collectionName = useCollectionNameStore(
+    (state) => state.collectionName
+  );
 
   const handleHintChange = (event: any) => {
     setHint(event.target.value);
+  };
+
+  const handleBulkRandomChange = (event: any) => {
+    setbulkRandomQuestions(event.target.value);
   };
 
   const handleCorrectOptionChange = (event: any) => {
@@ -55,6 +61,29 @@ export default function Questions() {
   };
 
   const submitQuestion = async () => {
+
+    if (questionType === "BulkRandom" && bulkRandomQuestions !== "") {
+      const splitQuestions = bulkRandomQuestions.split("\n");
+
+      splitQuestions.forEach(async (question) => {
+        if (question != "") {
+          await fetch("/api/addQuestion", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              questionType: "Random",
+              question: question,
+              collectionName: collectionName,
+            }),
+          });
+          setbulkRandomQuestions("");
+        }
+      })
+    }
+
+
     if (
       (questionType === "Write" ||
         questionType === "Random" ||
@@ -151,6 +180,7 @@ export default function Questions() {
             <MenuItem value={"RewriteHint"}>
               Rewrite with Hint Question
             </MenuItem>
+            <MenuItem value={"BulkRandom"}>Bulk Random Questions</MenuItem>
           </Select>
         </FormControl>
 
@@ -232,6 +262,18 @@ export default function Questions() {
               fullWidth
             />
           </Box>
+        )}
+
+        {questionType === "BulkRandom" && (
+          <TextField
+            id="bulk-random"
+            label="Bulk Random"
+            variant="outlined"
+            value={bulkRandomQuestions}
+            onChange={handleBulkRandomChange}
+            multiline
+            fullWidth
+          />
         )}
 
         {questionType !== "" && collectionName !== "" && (
