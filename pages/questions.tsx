@@ -16,7 +16,7 @@ export default function Questions() {
   const [questionType, setQuestionType] = React.useState("");
   const [writeQuestion, setWriteQuestion] = React.useState("");
   const [hint, setHint] = React.useState("");
-  const [bulkRandomQuestions, setbulkRandomQuestions] = React.useState("");
+  const [bulkQuestions, setbulkQuestions] = React.useState("");
 
   const [correctOption, setCorrectOption] = React.useState("");
   const [option1, setOption1] = React.useState("");
@@ -32,8 +32,8 @@ export default function Questions() {
     setHint(event.target.value);
   };
 
-  const handleBulkRandomChange = (event: any) => {
-    setbulkRandomQuestions(event.target.value);
+  const handleBulkChange = (event: any) => {
+    setbulkQuestions(event.target.value);
   };
 
   const handleCorrectOptionChange = (event: any) => {
@@ -61,9 +61,8 @@ export default function Questions() {
   };
 
   const submitQuestion = async () => {
-
-    if (questionType === "BulkRandom" && bulkRandomQuestions !== "") {
-      const splitQuestions = bulkRandomQuestions.split("\n");
+    if ((questionType === "BulkRandom" || questionType === "BulkWrite" || questionType === "BulkRewrite") && bulkQuestions !== "") {
+      const splitQuestions = bulkQuestions.split("\n");
 
       splitQuestions.forEach(async (question) => {
         if (question != "") {
@@ -73,16 +72,15 @@ export default function Questions() {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
-              questionType: "Random",
+              questionType: questionType.substring(4, question.length),
               question: question,
               collectionName: collectionName,
             }),
           });
-          setbulkRandomQuestions("");
+          setbulkQuestions("");
         }
-      })
+      });
     }
-
 
     if (
       (questionType === "Write" ||
@@ -161,31 +159,35 @@ export default function Questions() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="container">
-        <h1 className="title">Make Questions</h1>
-
-        <FormControl sx={{ m: 1, minWidth: 150 }}>
-          <InputLabel id="select-question-type">Question Type</InputLabel>
-          <Select
-            labelId="select-question-type"
-            id="select-question-type"
-            value={questionType}
-            label="Question Type"
-            onChange={chooseQuestion}
-          >
-            <MenuItem value={"Multiple Choice"}>Multiple Choice</MenuItem>
-            <MenuItem value={"Write"}>Write Sentence</MenuItem>
-            <MenuItem value={"Random"}>Random Order</MenuItem>
-            <MenuItem value={"Rewrite"}>Rewrite Question</MenuItem>
-            <MenuItem value={"RewriteHint"}>
-              Rewrite with Hint Question
-            </MenuItem>
-            <MenuItem value={"BulkRandom"}>Bulk Random Questions</MenuItem>
-          </Select>
-        </FormControl>
+      <main>
+        <h1 className="title">
+          Make Questions:{" "}
+          <FormControl sx={{ minWidth: 150, marginTop: 2}}>
+            <InputLabel id="select-question-type">Question Type</InputLabel>
+            <Select
+              labelId="select-question-type"
+              id="select-question-type"
+              value={questionType}
+              label="Question Type"
+              onChange={chooseQuestion}
+            >
+              <MenuItem value={"Multiple Choice"}>Multiple Choice</MenuItem>
+              <MenuItem value={"Write"}>Write Sentence</MenuItem>
+              <MenuItem value={"Random"}>Random Order</MenuItem>
+              <MenuItem value={"Rewrite"}>Rewrite Question</MenuItem>
+              <MenuItem value={"RewriteHint"}>
+                Rewrite with Hint Question
+              </MenuItem>
+              <MenuItem value={"BulkRandom"}>Bulk Random Order</MenuItem>
+              <MenuItem value={"BulkWrite"}>Bulk Write</MenuItem>
+              <MenuItem value={"BulkRewrite"}>Bulk Rewrite</MenuItem>
+            </Select>
+          </FormControl>
+        </h1>
 
         {questionType === "Multiple Choice" && (
           <Box>
+            <h1>Phần trắc nghiệm</h1>
             <TextField
               id="write-question"
               label="Enter Question"
@@ -232,6 +234,13 @@ export default function Questions() {
           questionType === "Random" ||
           questionType === "Rewrite") && (
           <Box>
+            {questionType === "Write" && <h1>Trả lời câu hỏi</h1>}
+            {questionType === "Random" && (
+              <h1>Sắp xếp từ thành câu hoàn chỉnh</h1>
+            )}
+            {questionType === "Rewrite" && (
+              <h1>Viết lại câu hoàn chỉnh dựa theo từ cho sẵn</h1>
+            )}
             <TextField
               id="write-question"
               label="Enter Question"
@@ -242,9 +251,9 @@ export default function Questions() {
             />
           </Box>
         )}
-
         {questionType === "RewriteHint" && (
           <Box>
+            <h1>Viết lại không thay đổi nghĩa</h1>
             <TextField
               id="write-question"
               label="Enter Question"
@@ -263,19 +272,20 @@ export default function Questions() {
             />
           </Box>
         )}
-
-        {questionType === "BulkRandom" && (
-          <TextField
-            id="bulk-random"
-            label="Bulk Random"
-            variant="outlined"
-            value={bulkRandomQuestions}
-            onChange={handleBulkRandomChange}
-            multiline
-            fullWidth
-          />
+        {(questionType === "BulkRandom" || questionType === "BulkWrite" || questionType === "BulkRewrite") && (
+          <Box>
+            <h1>Sắp xếp từ thành câu hoàn chỉnh</h1>
+            <TextField
+              id="bulk-random"
+              label={questionType}
+              variant="outlined"
+              value={bulkQuestions}
+              onChange={handleBulkChange}
+              multiline
+              fullWidth
+            />
+          </Box>
         )}
-
         {questionType !== "" && collectionName !== "" && (
           <Button onClick={submitQuestion}>Add Question</Button>
         )}

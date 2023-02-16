@@ -12,7 +12,7 @@ export default function Navbar() {
   };
 
   return (
-    <Box sx={{padding:3}}>
+    <Box sx={{pt:3, pl:3, pr:3}}>
       <nav className="navbar">
         <ul>
           <li>

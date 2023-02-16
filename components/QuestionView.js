@@ -97,8 +97,8 @@ export default function ViewQuestions() {
   return (
     <Box>
 
-      <h3>Title {"_".repeat(26)} Date {"_".repeat(26)}</h3>
-      <h3>Name {"_".repeat(25)} Grade {"_".repeat(25)}</h3>
+      <h3>Title: {"_".repeat(26 + 4)}  Date: {"_".repeat(26 + 4)}</h3>
+      <h3>Name: {"_".repeat(25 + 4)} Grade: {"_".repeat(25 + 4)}</h3>
 
       <MultipleChoiceView multipleChoiceQuestions={mcquestions} />
       <RewriteQuestionsView rewriteQuestions={rewriteQuestions} />

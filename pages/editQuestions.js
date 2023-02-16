@@ -67,7 +67,7 @@ export default function EditQuestions() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
+      <Box sx={{pl:3, pr:3}}>
         <h1 className="title">
           Click on the <DeleteIcon /> button to delete unwanted questions.
         </h1>
@@ -83,7 +83,7 @@ export default function EditQuestions() {
                 border: 1,
               }}
             >
-              <Box>
+              <Box sx={{padding:2}}>
                 <button onClick={() => handleDelete(question._id)}>
                   <DeleteIcon />
                 </button>
@@ -109,7 +109,7 @@ export default function EditQuestions() {
             </Box>
           );
         })}
-      </main>
+      </Box>
     </div>
   );
 }
