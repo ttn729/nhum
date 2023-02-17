@@ -274,7 +274,13 @@ export default function Questions() {
         )}
         {(questionType === "BulkRandom" || questionType === "BulkWrite" || questionType === "BulkRewrite") && (
           <Box>
-            <h1>Sắp xếp từ thành câu hoàn chỉnh</h1>
+            {questionType === "BulkWrite" && <h1>Trả lời câu hỏi</h1>}
+            {questionType === "BulkRandom" && (
+              <h1>Sắp xếp từ thành câu hoàn chỉnh</h1>
+            )}
+            {questionType === "BulkRewrite" && (
+              <h1>Viết lại câu hoàn chỉnh dựa theo từ cho sẵn</h1>
+            )}
             <TextField
               id="bulk-random"
               label={questionType}
